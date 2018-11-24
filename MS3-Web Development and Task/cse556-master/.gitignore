@@ -1,0 +1,4 @@
+# Config files
+*.swp
+*.code-workspace
+.idea/
