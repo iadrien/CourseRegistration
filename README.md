@@ -6,5 +6,10 @@
 ###### User behavior/requirements analyzed through affinity diagram
 ###### The diagram can be accessed at: https://trello.com/b/JpaYDZKr/affinity-diagram
 
-##### Second stage (current): conducting second round of interview to develop prototype
+##### Second stage: conducting second round of interview to develop prototype
 ###### Paper prototyping
+###### Complete task scenario captured through observation
+###### System requirement regathering
+
+##### Third Stage (current): development and task testing
+###### Developing the webpages necessary for complete tasks
