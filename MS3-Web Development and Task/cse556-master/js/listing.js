@@ -28,12 +28,19 @@ function checkWeekday(days) {
 }
 
 function parse() {
+    setBackDestination()
     var s = window.location.href
     s = s.split("?")[1]
     var params = s.split("&")
     var textBox = params[0].split("=")[1]
     var school = params[1].split("=")[1]
     var department = params[2].split("=")[1]
+    if(department == "ALL"){
+        console.log("ALL")
+    }else{
+        department = department.split(",")[1].replace("%20", '')
+    }
+
     var list = document.getElementById('listing');
     while (list.firstChild) {
         list.removeChild(list.firstChild);
@@ -42,14 +49,12 @@ function parse() {
     var user = getUsername();
 
     if(user == "sal"){
-        console.log("sal")
         //use crossDepart
         var count = 0;
         if(document.getElementById("requirements_check").checked){
-            console.log("checked")
             for (var i = 0; i < crossDepart.length; i++) {
                 // A correct match has its title as a substring
-                if (crossDepart[i][7].toLowerCase().includes(textBox)) {
+                if (crossDepart[i][7].toLowerCase().includes(textBox) || crossDepart[i][6].toLowerCase().includes(textBox.toLowerCase()) || textBox.toLocaleLowerCase().includes(crossDepart[i][1].toLowerCase())|| textBox.toLocaleLowerCase().includes(crossDepart[i][2])) {
                     // Matches the school dropdown
                     if ((crossDepart[i][0] == school) || (school == "ALL")) {
                         // Matches the department dropdown
@@ -79,11 +84,10 @@ function parse() {
                 }
             }
         }else{
-            console.log("unchecked")
             count = 0;
             for (var i = 0; i < classesDB.length; i++) {
                 // A correct match has its title as a substring
-                if (classesDB[i][7].toLowerCase().includes(textBox)) {
+                if (classesDB[i][7].toLowerCase().includes(textBox) || classesDB[i][6].toLowerCase().includes(textBox.toLowerCase())|| textBox.toLocaleLowerCase().includes(classesDB[i][1].toLowerCase())|| textBox.toLocaleLowerCase().includes(classesDB[i][2])) {
                     // Matches the school dropdown
                     if ((classesDB[i][0] == school) || (school == "ALL")) {
                         // Matches the department dropdown
@@ -109,21 +113,19 @@ function parse() {
         }
         document.getElementById("search_count").innerHTML = count + " search results"
         var res = ""
-        console.log(textBox.length)
-        
+
         document.getElementById("search_field").innerHTML = res
-        
+
 
     }
     else if(user == "frank"){
 
         // use allMusic
-        console.log(textBox.length != 0)
         var count = 0;
         if(textBox.length != 0){
             for (var i = 0; i < allMusic.length; i++) {
                 // A correct match has its title as a substring
-                if (allMusic[i][7].toLowerCase().includes(textBox)) {
+                if (allMusic[i][7].toLowerCase().includes(textBox) || allMusic[i][6].toLowerCase().includes(textBox.toLowerCase()) || textBox.toLocaleLowerCase().includes(allMusic[i][1].toLowerCase())|| textBox.toLocaleLowerCase().includes(allMusic[i][2])) {
                     // Matches the school dropdown
                     if ((allMusic[i][0] == school) || (school == "ALL")) {
                         // Matches the department dropdown
@@ -144,17 +146,16 @@ function parse() {
                                 buildListing(list, allMusic[i])
                                 count += 1
                             }
-                            
+
                         }
                     }
                 }
             }
         }else{
-            console.log("couldn't find")
             count = 0;
             for (var i = 0; i < classesDB.length; i++) {
                 // A correct match has its title as a substring
-                if (classesDB[i][7].toLowerCase().includes(textBox)) {
+                if (classesDB[i][7].toLowerCase().includes(textBox) || classesDB[i][6].toLowerCase().includes(textBox.toLowerCase()) || textBox.toLocaleLowerCase().includes(classesDB[i][1].toLowerCase())|| textBox.toLocaleLowerCase().includes(classesDB[i][2])) {
                     // Matches the school dropdown
                     if ((classesDB[i][0] == school) || (school == "ALL")) {
                         // Matches the department dropdown
@@ -174,7 +175,7 @@ function parse() {
                             } else if(classesDB[i][9].includes(textBox)){
                                 buildListing(list, classesDB[i])
                                 count += 1
-                            } 
+                            }
                         }
                     }
                 }
@@ -182,18 +183,15 @@ function parse() {
         }
         document.getElementById("search_count").innerHTML = count + " search results"
         var res = ""
-        console.log(textBox.length)
-        
+
         document.getElementById("search_field").innerHTML = res
 
 
     }else{
-
-
         var count = 0;
         for (var i = 0; i < classesDB.length; i++) {
             // A correct match has its title as a substring
-            if (classesDB[i][7].toLowerCase().includes(textBox)) {
+            if (classesDB[i][7].toLowerCase().includes(textBox) || classesDB[i][6].toLowerCase().includes(textBox.toLowerCase()) || textBox.toLocaleLowerCase().includes(classesDB[i][1].toLowerCase())|| textBox.toLocaleLowerCase().includes(classesDB[i][2])) {
                 // Matches the school dropdown
                 if ((classesDB[i][0] == school) || (school == "ALL")) {
                     // Matches the department dropdown
@@ -217,11 +215,9 @@ function parse() {
         }
         document.getElementById("search_count").innerHTML = count + " search results"
         var res = ""
-        console.log(textBox.length)
         if(textBox === undefined || textBox.length == 0) {
             res = "ALL CLASSES"
         }else {
-            console.log(textBox)
             res = textBox;
             if (department.length > 0) {
                 res = res + " in " + department
@@ -238,14 +234,12 @@ function buildListing(elm, arr) {
 
     var count = 0;
     var sum = 0;
-    console.log(arr)
     for(var i = 0; i<reviews.length; i++){
         if (reviews[i][0] == arr[0] && reviews[i][1] == arr[1] && reviews[i][2] == arr[2]){
             sum = sum + parseInt(reviews[i][5])
             count = count + 1
         }
     }
-    console.log(count)
 
     var div = document.createElement('div');
     div.id = arr[7];
@@ -257,6 +251,7 @@ function buildListing(elm, arr) {
         sum = 1;
         count =1;
     }
+
     div.innerHTML =
         '<span class="featured-rating-orange ">'+sum/count+'</span>\
         <a href="detail.html?class='+arr[7]+'">\
@@ -273,6 +268,5 @@ function buildListing(elm, arr) {
 }
 
 function likeclass(elem) {
-    console.log(elem.id);
     elem.style.color = 'red';
 }

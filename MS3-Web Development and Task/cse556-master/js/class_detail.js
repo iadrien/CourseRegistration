@@ -3,12 +3,38 @@ document.addEventListener('DOMContentLoaded', fillClass, false);
 var school, dept, num;
 
 function fillClass() {
+    setBackDestination()
     var s = window.location.href
-    s = s.split("?")[1]
-    var title = s.split("=")[1]
+    console.log(s)
+    var save = s.split("?")
+    s = save[1]
+
+    var sp = s.split("=")
+    var title = sp[1]
+
     var c = title.split("%20").length
     for(var i = 0; i< c ; i++){
         title = title.replace("%20"," ")
+    }
+    var c = title.split("%27").length
+    for(var i = 0; i< c ; i++){
+        title = title.replace("%27","'")
+    }
+
+    if(save.length > 2){
+        s = save[2]
+
+        var t = s;
+
+        var c = t.split("%20").length
+        for(var i = 0; i< c ; i++){
+            t = t.replace("%20"," ")
+        }
+        var c = t.split("%27").length
+        for(var i = 0; i< c ; i++){
+            t = t.replace("%27","'")
+        }
+        title = title + "?" + t;
     }
 
     for (var i = 0; i < classesDB.length; i++) {

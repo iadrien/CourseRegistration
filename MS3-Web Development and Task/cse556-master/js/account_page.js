@@ -35,8 +35,7 @@ function populateSchedule() {
     dp.init()
     dp.events.list = processCalendarEvents()
     dp.onEventClicked = function (d) {
-        var page = "detail.html?class=" + d.e["data"]["name"]
-        window.open(page, '_top')
+        showClassPopUp(d.e["data"]["name"], dp, d)
     }
     dp.update()
 }
@@ -218,10 +217,119 @@ function populateRequirements() {
 
 }
 
+function showClassPopUp(class_name, dp, d){
+    var modal = document.getElementById('ClassPopUp');
+
+    var class_id = document.getElementById("class_title");
+    class_id.innerHTML = class_name;
+
+   // var rating = document.getElementById("rating_detail");
+    var time_slot = document.getElementById("class_time");
+
+    var c ;
+    for (var i = 0; i < classesDB.length; i++) {
+        if (classesDB[i][7].toLowerCase().includes(class_name.toLowerCase())) {
+            c = classesDB[i];
+        }
+    }
+
+    // var count = 0;
+    // var sum = 0;
+
+    // for(var i = 0; i<reviews.length; i++){
+    //     if (reviews[i][0] == c[0] && reviews[i][1] == c[1] && reviews[i][2] == c[2]){
+    //         sum = sum + parseInt(reviews[i][5])
+    //         count = count + 1
+    //     }
+    // }
+
+    time_slot.innerHTML = c[5] + ' '+ twentyfour2ampm(c[3])+'-'+ twentyfour2ampm(c[4])
+
+    document.getElementById("doDrop").onclick = function(){
+        dropCoursePop(c, dp, d);
+    }
+
+    document.getElementById("add_review").onclick = function() {
+        submit_review(c)
+    }
+    modal.style.display = "block";
+}
+
+function showReviewChunk() {
+    var x = document.getElementById("review_section");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function submit_review(c) {
+    var modal = document.getElementById('review_section');
+    var review = document.getElementById("review_input").value
+    var grade = document.getElementById("grade_options").value
+    var rating = document.getElementById("rating_options").value
+
+    console.log(grade)
+    console.log(rating)
+
+    var s = c[0] + ","+ c[1] + ","+ c[2] + ","+ review + "," + grade + "," + rating
+    addReview(s)
+    populateReviews()
+
+    modal.style.display = "none";
+    document.getElementById('ClassPopUp').style.display = "none"
+
+    // Reset popup form
+    document.getElementById("review_input").value = ""
+    document.getElementById("grade_options").value = "A"
+    document.getElementById("rating_options").value = "5"
+}
+
+function  setup_popups() {
+
+    var modal_one = document.getElementById('ClassPopUp');
+    // Get the <span> element that closes the modal
+    //var span = document.getElementsByClassName("close")[0];
+    var span_one = document.getElementById("close_one");
+    // When the user clicks on <span> (x), close the modal
+    span_one.onclick = function () {
+        modal_one.style.display = "none";
+    };
+
+    var modal = document.getElementById('DropCoursePopUp');
+    var btn = document.getElementById("dropCourse");
+
+    btn.onclick = function(){
+        modal.style.display = "block";
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[1];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    document.getElementById("dontDrop").onclick = function(){
+        modal.style.display = "none";
+    }
+
+}
+
+function dropCoursePop(course, cal, event){
+    removeCourse(course)
+    document.getElementById('ClassPopUp').style.display = "none"
+    document.getElementById('DropCoursePopUp').style.display = "none"
+
+    populateSchedule()
+}
+
+setBackDestination()
 // Display 'Current Schedule' tab on page load
 document.getElementById("defaultOpen").click()
 populateRequirements()
 populateSchedule()
 academicCalendar()
 populateReviews()
+setup_popups()
 document.getElementById("welcome-message").innerHTML = "Welcome " + getUsername() + "!"

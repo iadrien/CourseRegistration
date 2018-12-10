@@ -32,6 +32,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="#" onclick="goBack()">Back</a>
                         <a class="navbar-brand" href="./search.html">Home</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-menu"></span>
@@ -47,6 +48,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="./registration.html">Registration</a>
+                                    </li>
+                                    <li class="nav-item">
+                                            <a class="nav-link" href="#" onclick="signOut()">Sign Out</a>
                                     </li>
                                 </ul>
                             </ul>
@@ -65,7 +69,8 @@
                 <div class="slider-content_wrap">
                     <h1 class="center">Registration Confirmation</h1>
                     <div id="enrolled"></div>
-                    <button type="button" id="enroll-button">Enroll!</button>
+                    <br>
+                    <button type="button" id="enroll-button" class="btn btn-danger">Enroll!</button>
                 </div>
             </div>
         </div>
@@ -92,6 +97,17 @@
     </div>
 </footer>
 <!--//END FOOTER -->
+
+
+<div id="RegisterForClassesPopUp" class="modal">
+    <div class="modal-content">
+        <div class="customer-review_wrap">
+            <p>Are you sure you wish to register for these courses?</p>
+            <button id="registerForClasses"> Yes</button>
+            <button id="dontRegisterForClasses"> No</button>
+        </div>
+    </div>
+</div>
 
 <!-- jQuery, Bootstrap JS. -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

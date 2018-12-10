@@ -36,6 +36,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="#" onclick="goBack()">Back</a>
                         <a class="navbar-brand" href="./search.html">Home</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="icon-menu"></span>
@@ -51,6 +52,9 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="./registration.html">Registration</a>
+                                    </li>
+                                    <li class="nav-item">
+                                            <a class="nav-link" href="#" onclick="signOut()">Sign Out</a>
                                     </li>
                                 </ul>
                             </ul>
@@ -128,7 +132,76 @@
 </footer>
 <!--//END FOOTER -->
 
+<!-- POP UP FOR DROPPING COURSE -->
+<div id="ClassPopUp" class="modal">
+        <div class="modal-content">
+            <span  id="close_one" class="close">&times;</span>
+            <hr>
+            <div class="customer-review_wrap">
+                <p class="reserve-description" id="class_title"></p>
+                <p id="class_time"></p>
+                <br>
+                <div class="reserve-seat-block">
+                    <!-- <div class="reserve-rating">
+                        <span id="rating_detail"></span>
+                    </div> -->
+                    <div class="review-btn">
+                        <button id="add_review_btn" class="btn btn-outline-danger" onclick="showReviewChunk()">WRITE A REVIEW</button>
+                        <span id="top_num_reviews"></span>
+                    </div>
+                    <div class="reserve-btn">
+                        <div class="featured-btn-wrap">
+                            <button id="dropCourse" class="btn btn-danger">Drop Course</button>
+                        </div>
+                    </div>
+                </div>
+                <section id="review_section" style="display:none" >
+                    <div class="customer-img">
+                        <label for="rating_options"></label>
+                        <select id="rating_options">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                        </select>
+                        <hr>
+                        <label for="grade_options">What grade did you earn:</label>
+                        <select id="grade_options">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="P">P</option>
+                            <option value="F">F</option>
+                        </select>
+                        <hr>
+                        <p>
+                            <label for="review_input">Enter your review:</label>
+                            <textarea id="review_input" rows="4" cols="50"></textarea>
+                        </p>
+                        <p id="new_review_rating"></p>
 
+                        <p>
+                        <input type="Submit" id="add_review" name="add_review" value="Submit" />
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="DropCoursePopUp" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <hr>
+            <div class="customer-review_wrap">
+                <p> Are you sure you want to drop this course?</p>
+                <button id="doDrop"> Yes</button>
+                <button id="dontDrop"> No</button>
+            </div>
+        </div>
+    </div>
 
 
 <!-- jQuery, Bootstrap JS. -->

@@ -8,22 +8,37 @@ function clearCookies() {
     var decodedCookie = decodeURIComponent(document.cookie)
     var ca = decodedCookie.split(';')
     for (var i =0; i < ca.length; i++) {
-        document.cookie = ca[i] + " expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+        document.cookie = ca[i] + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
     }
 }
 
+function signOut(){
+    clearCookies();
+    window.location = "./../index.html"
+}
+
 function setUsername(name) {
+    console.log("set " + name)
     document.cookie = "username=" + name + "; expires=Tue, 01 Jan 2019 00:00:01 GMT"
     window.location = "pages/account.html"
 
 }
 
+function setBackDestination(){
+}
+
+function goBack(){
+    window.history.back();
+}
+
 function getUsername() {
+
     var name = "username="
     var decodedCookie = decodeURIComponent(document.cookie)
     var ca = decodedCookie.split(';')
     for(var i = 0; i < ca.length; i++) {
         var c = ca[i]
+        console.log(c)
         while (c.charAt(0) == ' ') {
             c = c.substring(1)
         }
@@ -31,6 +46,7 @@ function getUsername() {
             return c.substring(name.length, c.length)
         }
     }
+
     return ""
 }
 
@@ -68,6 +84,8 @@ function checkCourse(course) {
     return false
 }
 
+// Same as 'dropCourse' but completely removes it
+// Probably could merge functions but idgaf
 function removeCourse(course) {
     // If course is in cookie, then remove
     if (checkCourse(course)) {
