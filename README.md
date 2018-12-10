@@ -11,5 +11,14 @@
 ###### Complete task scenario captured through observation
 ###### System requirement regathering
 
-##### Third Stage (current): development and task testing
+##### Third Stage: development (Digital Prototyping) and task testing
 ###### Developing the webpages necessary for complete tasks
+###### Develop task sequence for future user testing
+###### Develop variaty in system functionality achievement
+
+##### Fourth stage: user testing, user based and non-user based evaluation
+###### First round of user testing conducted to improve implementation
+###### Cognitive walkthrough for the non-user based evaluation
+###### Third round of user testing conducted to improve implementation
+###### System requirement re-evaluation and system performance evaluation
+###### Fix bugs detected during user testing
