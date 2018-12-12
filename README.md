@@ -16,9 +16,11 @@
 ###### Develop task sequence for future user testing
 ###### Develop variaty in system functionality achievement
 
-##### Fourth stage: user testing, user based and non-user based evaluation
+##### Fourth stage (current): user testing, user based and non-user based evaluation
 ###### First round of user testing conducted to improve implementation
 ###### Cognitive walkthrough for the non-user based evaluation
 ###### Third round of user testing conducted to improve implementation
 ###### System requirement re-evaluation and system performance evaluation
 ###### Fix bugs detected during user testing
+
+More testing and fix...
